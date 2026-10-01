@@ -4,7 +4,7 @@ import paho.mqtt.client as mqtt
 
 BROKER = "broker.emqx.io"
 PORTA = 1883
-TOPICO_COMANDO =  "uniso/granja01/ventilador/comando"
+TOPICO_COMANDO =  "uniso/granja01/sensores/temperatura"
 TOPICO_STATUS = "uniso/granja01/atuadores/ventilador/status"
 
 ligado = False 
