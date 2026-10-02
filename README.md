@@ -9,8 +9,8 @@ Sistema de três programas Python que se comunicam por um broker MQTT: um sensor
 Nomes conforme o `RELATORIO.md`:
 
 - Gustavo Henrique Silva (responsável pelo cérebro, segundo o título do relatório: "Cérebro (Aluno 3)")
-- Julia Mayumi Hayashi
-- Eduardo Augusto
+- Julia Mayumi Hayashi (responsável pelo sensor, segundo o título do relatório: "sensor (Aluno 1)")
+- Eduardo Augusto (responsável pelo ventilador, segundo o título do relatório: "ventilador (Aluno 2)")
 
 ## Arquivos
 
