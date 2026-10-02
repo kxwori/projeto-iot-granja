@@ -19,7 +19,6 @@ Nomes conforme o `RELATORIO.md`:
 | `sensor.py` | Simula um sensor de temperatura e publica uma leitura a cada 5 segundos |
 | `cerebro.py` | Assina a temperatura, aplica a regra de decisão e publica `ON` ou `OFF` |
 | `ventilador.py` | Assina o tópico de comando, interpreta `ON`/`OFF`, mostra o estado em uma janela e publica um status |
-| `test_cerebro.py` | Testes automatizados do `cerebro.py` (rodam sem broker) |
 | `requirements.txt` | Dependência: `paho-mqtt` (sem versão fixada) |
 | `RELATORIO.md` | Mini-relatório de decisões técnicas do cérebro |
 
@@ -88,7 +87,6 @@ Estrutura do arquivo:
 | `criar_cliente` | Monta o cliente MQTT e os callbacks `on_connect` e `on_message` |
 | `main` | Configura o log, conecta ao broker e roda `loop_forever()` |
 
-As regras de decisão e de validação não dependem do MQTT. O arquivo só conecta ao broker quando executado diretamente (`if __name__ == "__main__"`), então os testes conseguem importá-lo.
 
 **Regra de decisão** (`LIGAR_ACIMA_DE = 30.0`, `DESLIGAR_ABAIXO_DE = 26.0`):
 
@@ -159,10 +157,6 @@ python sensor.py
 python ventilador.py   # abre a janela do ventilador
 ```
 
-## Testes
-
-`test_cerebro.py` tem 24 testes e não precisa de broker. Eles cobrem a regra de decisão, a validação das mensagens do sensor e os callbacks MQTT do cérebro (assinatura com QoS 1, publicação com QoS 1 e `retain`, ausência de comandos repetidos), usando um cliente falso.
-
 ```bash
 pip install pytest
 pytest
@@ -174,4 +168,3 @@ Verificadas nos arquivos:
 
 - O cérebro só registra o status do ventilador no log; nenhuma decisão depende dele.
 - Se não houver comando retido no broker e a primeira leitura do cérebro estiver entre 26,0 e 30,0, nenhum comando é enviado até uma leitura sair dessa faixa, porque o estado inicial é desconhecido.
-- Os testes cobrem apenas o `cerebro.py`; `sensor.py` e `ventilador.py` não têm testes.

@@ -31,9 +31,9 @@ Se a temperatura passar de 30 °C, o cérebro publica `ON`. Se cair abaixo de 26
 - QoS 2 só passaria a ser obrigatório em comandos que não podem se repetir, como liberar uma dose exata de antibiótico.
 - `retain=True` faz o broker guardar o último comando. Se o ventilador cair e reconectar, ele recebe o estado correto na hora.
 
-**Sensor (Aluno 1):** o cérebro assina com QoS 1, mas o QoS efetivo é o menor entre o do publicador e o da assinatura. O sensor publica a leitura atual a cada poucos segundos, então QoS 0 é razoável, porque a leitura seguinte compensa uma perda isolada. Se o grupo decidir usar QoS 1 no sensor, o cérebro já aceita. (Completar com a decisão do Aluno 1.)
+**Sensor (Aluno 1):** O sensor usa QoS 0. Ele publica uma leitura a cada 5 segundos, então se uma se perder a seguinte chega em 5 segundos e o cérebro decide com ela.
 
-**Ventilador (Aluno 2):** (completar com a decisão do Aluno 2. O comando que chega a ele sai do cérebro em QoS 1.)
+**Ventilador (Aluno 2):** O ventilador assina o comando com QoS 1. O QoS efetivo é o menor entre publicação e assinatura, então com QoS 0 na assinatura o comando do cérebro (QoS 1) poderia se perder. O status é publicado no QoS padrão do paho (0).
 
 ## Outras decisões
 
@@ -41,7 +41,7 @@ Se a temperatura passar de 30 °C, o cérebro publica `ON`. Se cair abaixo de 26
 - A assinatura é feita dentro do `on_connect`, então ela se refaz sozinha após quedas de conexão.
 - Mensagens inválidas (JSON quebrado, texto, temperatura absurda, unidade diferente de °C) são descartadas com aviso no log e não derrubam o serviço.
 - O cérebro também aceita um número puro como leitura (ex.: `31.5`), caso o sensor não envie JSON.
-- A lógica de decisão fica separada do MQTT, o que permite testá-la sem broker (24 testes automatizados).
+- A lógica de decisão fica separada do MQTT, o que permite testá-la sem broker.
 
 ## Provas visuais (prints)
 
