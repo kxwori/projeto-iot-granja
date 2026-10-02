@@ -2,7 +2,7 @@
 
 **Grupo:**
 - Gustavo Henrique Silva - RA: 00123487
-- Julia Mayumi Hayashi - RA: 
+- Julia Mayumi Hayashi - RA: 00123374
 - Eduardo Augusto - RA: 00124146
 
 ## Tópicos MQTT usados
