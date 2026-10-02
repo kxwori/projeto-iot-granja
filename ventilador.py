@@ -4,14 +4,14 @@ import paho.mqtt.client as mqtt
 
 BROKER = "broker.emqx.io"
 PORTA = 1883
-TOPICO_COMANDO =  "uniso/granja01/sensores/temperatura"
+TOPICO_COMANDO = "uniso/granja01/atuadores/ventilador/comando"
 TOPICO_STATUS = "uniso/granja01/atuadores/ventilador/status"
 
 ligado = False 
 
 
 def on_connect(client, userdata, flags, rc, props):
-    client.subscribe(TOPICO_COMANDO)
+    client.subscribe(TOPICO_COMANDO, qos=1)
 
 
 def on_message(client, userdata, msg):
